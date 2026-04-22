@@ -61,6 +61,10 @@
                                    HasShadow="True"
                                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
                                    BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnArticleTapped"
+                                                          CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
                                 <Grid ColumnDefinitions="*,100"
                                       RowDefinitions="Auto,Auto,Auto"
                                       ColumnSpacing="12"

@@ -56,6 +56,14 @@ public partial class MainPage : ContentPage
         }
     }
 
+    private async void OnArticleTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Parameter is Article selected)
+        {
+            await DisplayAlertAsync("Article sélectionné", selected.Titre, "OK");
+        }
+    }
+
     private async void OnHomeClicked(object? sender, EventArgs e)
     {
         SetActiveTab("home");
