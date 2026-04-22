@@ -12,7 +12,16 @@
                    FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
 
-            <Label Text="Page exemple (navigation demandée par le devoir)."
+            <Label Text="Profil Fabrice"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+            <Label Text="Application : NewsApp"
+                   FontSize="14"
+                   TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+            <Label Text="Date : 22 avril 2026"
                    FontSize="14"
                    TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
         </VerticalStackLayout>
@@ -26,29 +35,50 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ImageButton Grid.Column="0"
-                         Source="home.png"
-                         Clicked="OnHomeClicked"
-                         BackgroundColor="Transparent"
-                         HeightRequest="28"
-                         WidthRequest="28"
-                         HorizontalOptions="Center" />
+            <Border x:Name="HomeTab"
+                    Grid.Column="0"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="home.png"
+                             Clicked="OnHomeClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="22"
+                             WidthRequest="22"
+                             HorizontalOptions="Center" />
+            </Border>
 
-            <ImageButton Grid.Column="1"
-                         Source="favoris.png"
-                         Clicked="OnFavoritesClicked"
-                         BackgroundColor="Transparent"
-                         HeightRequest="28"
-                         WidthRequest="28"
-                         HorizontalOptions="Center" />
+            <Border x:Name="FavoritesTab"
+                    Grid.Column="1"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="favoris.png"
+                             Clicked="OnFavoritesClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="22"
+                             WidthRequest="22"
+                             HorizontalOptions="Center" />
+            </Border>
 
-            <ImageButton Grid.Column="2"
-                         Source="profil.png"
-                         Clicked="OnProfileClicked"
-                         BackgroundColor="Transparent"
-                         HeightRequest="28"
-                         WidthRequest="28"
-                         HorizontalOptions="Center" />
+            <Border x:Name="ProfileTab"
+                    Grid.Column="2"
+                    Padding="10"
+                    BackgroundColor="#E5E7EB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="profil.png"
+                             Clicked="OnProfileClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="22"
+                             WidthRequest="22"
+                             HorizontalOptions="Center" />
+            </Border>
         </Grid>
     </Grid>
 

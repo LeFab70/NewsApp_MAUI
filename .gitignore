@@ -1,0 +1,15 @@
+# .NET / Visual Studio / MAUI
+bin/
+obj/
+.vs/
+
+# macOS
+.DS_Store
+
+# Android / MAUI generated
+**/*.apk
+**/*.aab
+**/*.idsig
+**/*.keystore
+**/*.jks
+

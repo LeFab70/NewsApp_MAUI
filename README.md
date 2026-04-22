@@ -23,16 +23,17 @@
 
 ## Commandes pour lancer
 
-Depuis la racine du dossier (là où se trouve ce `README.md`) :
+Place-toi d’abord dans le dossier du projet MAUI :
 
 ### Build Android
 
 ```bash
-dotnet build "NewsApp/NewsApp.csproj" -c Debug -f net10.0-android
+cd NewsApp
+dotnet build "NewsApp.csproj" -c Debug -f net10.0-android
 ```
 
 ### Lancer sur émulateur/appareil Android
 
 ```bash
-dotnet build "NewsApp/NewsApp.csproj" -t:Run -c Debug -f net10.0-android
+dotnet build "NewsApp.csproj" -t:Run -c Debug -f net10.0-android
 ```
