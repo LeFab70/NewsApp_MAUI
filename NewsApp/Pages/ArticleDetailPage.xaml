@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Pages.ArticleDetailPage"
+             Title="Détails"
+             BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Image Source="{Binding Article.Image}"
+                   HeightRequest="210"
+                   Aspect="AspectFill" />
+
+            <Label Text="{Binding Article.Titre}"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+            <Label Text="{Binding Article.SourceEtDate}"
+                   FontSize="12"
+                   TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+            <Label Text="{Binding Article.Contenu}"
+                   FontSize="14"
+                   LineHeight="1.25"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+
