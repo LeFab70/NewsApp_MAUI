@@ -119,8 +119,8 @@
                 <ImageButton Source="home.png"
                              Clicked="OnHomeClicked"
                              BackgroundColor="Transparent"
-                             HeightRequest="22"
-                             WidthRequest="22"
+                             HeightRequest="16"
+                             WidthRequest="16"
                              HorizontalOptions="Center" />
             </Border>
 
@@ -134,8 +134,8 @@
                 <ImageButton Source="favoris.png"
                              Clicked="OnFavoritesClicked"
                              BackgroundColor="Transparent"
-                             HeightRequest="22"
-                             WidthRequest="22"
+                             HeightRequest="16"
+                             WidthRequest="16"
                              HorizontalOptions="Center" />
             </Border>
 
@@ -149,8 +149,8 @@
                 <ImageButton Source="profil.png"
                              Clicked="OnProfileClicked"
                              BackgroundColor="Transparent"
-                             HeightRequest="22"
-                             WidthRequest="22"
+                             HeightRequest="16"
+                             WidthRequest="16"
                              HorizontalOptions="Center" />
             </Border>
         </Grid>

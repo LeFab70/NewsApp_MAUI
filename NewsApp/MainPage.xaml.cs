@@ -67,6 +67,8 @@ public partial class MainPage : ContentPage
     private async void OnHomeClicked(object? sender, EventArgs e)
     {
         SetActiveTab("home");
+        // Recharger tous les articles pour réinitialiser les filtres
+        ArticleCollection.ItemsSource = allArticles;
         await Shell.Current.GoToAsync("//MainPage");
     }
 
