@@ -8,6 +8,7 @@ public partial class ProfilePage : ContentPage
         public const string DefaultCategory = "default_category";
         public const string DarkTheme = "dark_theme";
         public const string Notifications = "notifications_enabled";
+        public const string NewsCountry = "news_country";
     }
 
     public ProfilePage()
@@ -17,6 +18,13 @@ public partial class ProfilePage : ContentPage
         DefaultCategoryPicker.ItemsSource = new List<string>
         {
             "Tout", "Politique", "Sport", "Cinéma", "Technologie"
+        };
+
+        CountryPicker.ItemsSource = new List<string>
+        {
+            "USA (us)",
+            "Canada (ca)",
+            "France (fr)"
         };
     }
 
@@ -28,6 +36,14 @@ public partial class ProfilePage : ContentPage
         DisplayNameEntry.Text = Preferences.Get(PrefKeys.DisplayName, "Fabrice");
         var defaultCat = Preferences.Get(PrefKeys.DefaultCategory, "Tout");
         DefaultCategoryPicker.SelectedItem = defaultCat;
+
+        var country = Preferences.Get(PrefKeys.NewsCountry, "us").Trim().ToLowerInvariant();
+        CountryPicker.SelectedItem = country switch
+        {
+            "ca" => "Canada (ca)",
+            "fr" => "France (fr)",
+            _ => "USA (us)"
+        };
 
         var dark = Preferences.Get(PrefKeys.DarkTheme, false);
         DarkThemeSwitch.IsToggled = dark;
@@ -43,6 +59,9 @@ public partial class ProfilePage : ContentPage
         Preferences.Set(PrefKeys.DefaultCategory, DefaultCategoryPicker.SelectedItem?.ToString() ?? "Tout");
         Preferences.Set(PrefKeys.DarkTheme, DarkThemeSwitch.IsToggled);
         Preferences.Set(PrefKeys.Notifications, NotificationsSwitch.IsToggled);
+        var selectedCountry = CountryPicker.SelectedItem?.ToString() ?? "USA (us)";
+        var code = selectedCountry.Contains("(ca)") ? "ca" : selectedCountry.Contains("(fr)") ? "fr" : "us";
+        Preferences.Set(PrefKeys.NewsCountry, code);
 
         ApplyTheme(DarkThemeSwitch.IsToggled);
         AppShell.RefreshTitle();

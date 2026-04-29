@@ -115,6 +115,11 @@ public partial class MainPage : ContentPage
         await _vm.ChargerArticles();
     }
 
+    private async void OnRefreshClicked(object? sender, EventArgs e)
+    {
+        await _vm.ChargerArticles();
+    }
+
     private void SetActiveTab(string tab)
     {
         var active = Color.FromArgb("#E5E7EB");

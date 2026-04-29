@@ -5,6 +5,10 @@
              Title="NewsApp"
              BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Rafraîchir" Clicked="OnRefreshClicked" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="*,Auto">
         <!-- IMPORTANT: pas de ScrollView autour d'une CollectionView -->
         <Grid Grid.Row="0" Padding="20" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="15">
@@ -56,6 +60,16 @@
                    TextColor="#856404"
                    HorizontalTextAlignment="Center"
                    Padding="8" />
+
+            <Label Grid.Row="2"
+                   Margin="0,44,0,0"
+                   Text="{Binding ApiErreurTexte}"
+                   IsVisible="{Binding AfficherApiErreur}"
+                   BackgroundColor="#FFF3CD"
+                   TextColor="#856404"
+                   HorizontalTextAlignment="Center"
+                   Padding="8"
+                   FontSize="12" />
 
             <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="10" VerticalOptions="Center">
                 <ActivityIndicator Grid.Column="0"

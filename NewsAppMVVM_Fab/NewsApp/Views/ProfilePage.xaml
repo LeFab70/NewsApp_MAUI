@@ -32,6 +32,12 @@
                         <Picker x:Name="DefaultCategoryPicker"
                                 Title="Choisir une catégorie" />
 
+                        <Label Text="Pays des actualités"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                        <Picker x:Name="CountryPicker"
+                                Title="Choisir un pays" />
+
                         <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
                             <Label Grid.Column="0"
                                    Text="Thème sombre"

@@ -55,6 +55,20 @@ public class NewsViewModel : INotifyPropertyChanged
         }
     }
 
+    private string _apiErreurTexte = "";
+    public string ApiErreurTexte
+    {
+        get => _apiErreurTexte;
+        private set
+        {
+            _apiErreurTexte = value;
+            Notify(nameof(ApiErreurTexte));
+            Notify(nameof(AfficherApiErreur));
+        }
+    }
+
+    public bool AfficherApiErreur => !string.IsNullOrWhiteSpace(ApiErreurTexte);
+
     private string _resultatsTexte = "";
     public string ResultatsTexte
     {
@@ -73,7 +87,7 @@ public class NewsViewModel : INotifyPropertyChanged
     {
         EstEnChargement = true;
 
-        var (articles, fallback) = await _service.GetArticles(categorie);
+        var (articles, fallback, error) = await _service.GetArticles(categorie);
         _tousLesArticles = articles ?? new();
 
         // Si fallback, on filtre localement par "rubrique" (pas d'appel API possible)
@@ -92,6 +106,7 @@ public class NewsViewModel : INotifyPropertyChanged
 
         Articles = new ObservableCollection<Article>(_tousLesArticles);
         EstFallback = fallback;
+        ApiErreurTexte = fallback ? (error ?? "Mode hors ligne (données locales).") : "";
 
         ResultatsTexte = "";
         EstEnChargement = false;
