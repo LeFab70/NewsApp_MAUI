@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.MainPage"
+             Title="NewsApp"
+             BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <Frame BackgroundColor="{AppThemeBinding Light=#F1F3F4, Dark=#111827}"
+                       CornerRadius="12"
+                       Padding="5"
+                       HasShadow="False"
+                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}">
+                    <SearchBar x:Name="SearchBar"
+                               Placeholder="Rechercher dans les articles..."
+                               TextChanged="OnSearchTextChanged"
+                               BackgroundColor="Transparent"
+                               TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}"
+                               PlaceholderColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                </Frame>
+
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="Politique"
+                            Clicked="OnCategoryClicked"
+                            CornerRadius="12"
+                            Padding="14,10"
+                            BackgroundColor="#DBEAFE"
+                            TextColor="#1D4ED8" />
+                    <Button Text="Sport"
+                            Clicked="OnCategoryClicked"
+                            CornerRadius="12"
+                            Padding="14,10"
+                            BackgroundColor="#DCFCE7"
+                            TextColor="#166534" />
+                    <Button Text="Cinéma"
+                            Clicked="OnCategoryClicked"
+                            CornerRadius="12"
+                            Padding="14,10"
+                            BackgroundColor="#FEE2E2"
+                            TextColor="#B91C1C" />
+                    <Button Text="Technologie"
+                            Clicked="OnCategoryClicked"
+                            CornerRadius="12"
+                            Padding="14,10"
+                            BackgroundColor="#FCE7F3"
+                            TextColor="#BE185D" />
+                </HorizontalStackLayout>
+
+                <Label Text="📴 Hors ligne — données locales"
+                       IsVisible="{Binding EstFallback}"
+                       BackgroundColor="#FFF3CD"
+                       TextColor="#856404"
+                       HorizontalTextAlignment="Center"
+                       Padding="8" />
+
+                <ActivityIndicator IsRunning="{Binding EstEnChargement}"
+                                   IsVisible="{Binding EstEnChargement}"
+                                   Color="#1E88E5"
+                                   HorizontalOptions="Center" />
+
+                <Label Text="{Binding ResultatsTexte}"
+                       IsVisible="{Binding AfficherResultats}"
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+                <RefreshView IsRefreshing="{Binding EstEnChargement}"
+                             Refreshing="OnRefresh">
+                    <CollectionView x:Name="ArticleCollection"
+                                    ItemsSource="{Binding Articles}"
+                                    SelectionMode="Single"
+                                    SelectionChanged="OnSelectionChanged">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Margin="0,0,0,12"
+                                       Padding="12"
+                                       CornerRadius="16"
+                                       HasShadow="True"
+                                       BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}">
+                                    <Grid ColumnDefinitions="*,100"
+                                          RowDefinitions="Auto,Auto,Auto"
+                                          ColumnSpacing="12"
+                                          RowSpacing="6">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               Text="{Binding Titre}"
+                                               FontAttributes="Bold"
+                                               FontSize="15"
+                                               TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+                                        <Label Grid.Row="1" Grid.Column="0"
+                                               Text="{Binding Description}"
+                                               FontSize="13"
+                                               TextColor="{AppThemeBinding Light=#374151, Dark=#CBD5E1}" />
+
+                                        <Label Grid.Row="2" Grid.Column="0"
+                                               Text="{Binding SourceEtDate}"
+                                               FontSize="11"
+                                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+                                        <Image Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+                                               Source="{Binding Image}"
+                                               WidthRequest="90"
+                                               HeightRequest="70"
+                                               Aspect="AspectFill" />
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+     
+        <Grid Grid.Row="1"
+              Padding="14,10"
+              BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="HomeTab"
+                    Grid.Column="0"
+                    Padding="10"
+                    BackgroundColor="#E5E7EB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="home.png"
+                             Clicked="OnHomeClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="16"
+                             WidthRequest="16"
+                             HorizontalOptions="Center" />
+            </Border>
+
+            <Border x:Name="FavoritesTab"
+                    Grid.Column="1"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="favoris.png"
+                             Clicked="OnFavoritesClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="16"
+                             WidthRequest="16"
+                             HorizontalOptions="Center" />
+            </Border>
+
+            <Border x:Name="ProfileTab"
+                    Grid.Column="2"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    HorizontalOptions="Center">
+                <ImageButton Source="profil.png"
+                             Clicked="OnProfileClicked"
+                             BackgroundColor="Transparent"
+                             HeightRequest="16"
+                             WidthRequest="16"
+                             HorizontalOptions="Center" />
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>

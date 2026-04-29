@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Views.DetailPage"
+             Title="Détails"
+             BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Image Source="{Binding UrlToImage}"
+                   HeightRequest="220"
+                   Aspect="AspectFill" />
+
+            <Label Text="{Binding Title}"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+            <Label Text="{Binding SourceEtDate}"
+                   FontSize="12"
+                   TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+            <Label Text="{Binding Content}"
+                   FontSize="14"
+                   LineHeight="1.25"
+                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Lire l'article complet"
+                        Clicked="OnLire"
+                        CornerRadius="12"
+                        BackgroundColor="#111827"
+                        TextColor="#FFFFFF"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Partager"
+                        Clicked="OnPartager"
+                        CornerRadius="12"
+                        BackgroundColor="#E5E7EB"
+                        TextColor="#111827" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+

@@ -13,3 +13,6 @@ obj/
 **/*.keystore
 **/*.jks
 
+# Secrets
+**/Secrets.cs
+
