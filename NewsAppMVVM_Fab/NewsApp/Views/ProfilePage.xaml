@@ -6,25 +6,59 @@
              BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
 
     <Grid RowDefinitions="*,Auto">
-        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="12">
-            <Label Text="Profil"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="12">
+                <Label Text="Paramètres"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
 
-            <Label Text="Profil Fabrice"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+                <Frame Padding="12"
+                       CornerRadius="16"
+                       HasShadow="True"
+                       BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Nom d'affichage"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                        <Entry x:Name="DisplayNameEntry"
+                               Placeholder="Ex: Fabrice"
+                               TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
 
-            <Label Text="Application : NewsApp"
-                   FontSize="14"
-                   TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                        <Label Text="Catégorie par défaut"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+                        <Picker x:Name="DefaultCategoryPicker"
+                                Title="Choisir une catégorie" />
 
-            <Label Text="Date : 22 avril 2026"
-                   FontSize="14"
-                   TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
-        </VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                            <Label Grid.Column="0"
+                                   Text="Thème sombre"
+                                   FontSize="14"
+                                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+                            <Switch x:Name="DarkThemeSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                            <Label Grid.Column="0"
+                                   Text="Notifications"
+                                   FontSize="14"
+                                   TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+                            <Switch x:Name="NotificationsSwitch"
+                                    Grid.Column="1" />
+                        </Grid>
+
+                        <Button Text="Enregistrer"
+                                Clicked="OnSaveClicked"
+                                CornerRadius="12"
+                                BackgroundColor="#111827"
+                                TextColor="#FFFFFF" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
 
         <Grid Grid.Row="1"
               Padding="14,10"

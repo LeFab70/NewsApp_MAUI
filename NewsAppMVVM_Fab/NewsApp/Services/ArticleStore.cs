@@ -10,6 +10,7 @@ public static class ArticleStore
         {
             Title = "Politique : Actualité à la chambre des communes",
             Description = "Le Parlement adopte une nouvelle loi. (fallback)",
+            Url = "local://politique-1",
             UrlToImage = "news1.png",
             Content = "Texte local (fallback) — sans connexion Internet.",
             Source = new() { Name = "Radio Canada" },
@@ -19,6 +20,7 @@ public static class ArticleStore
         {
             Title = "Sport : Victoire spectaculaire en prolongation",
             Description = "Un match intense se conclut sur un but décisif. (fallback)",
+            Url = "local://sport-1",
             UrlToImage = "news2.png",
             Content = "Texte local (fallback) — sans connexion Internet.",
             Source = new() { Name = "RDS" },
@@ -28,6 +30,7 @@ public static class ArticleStore
         {
             Title = "Cinéma : Un film québécois primé à l’international",
             Description = "La production locale reçoit un prix prestigieux. (fallback)",
+            Url = "local://cinema-1",
             UrlToImage = "news3.png",
             Content = "Texte local (fallback) — sans connexion Internet.",
             Source = new() { Name = "Le Devoir" },
@@ -37,6 +40,7 @@ public static class ArticleStore
         {
             Title = "Technologie : Une nouvelle IA révolutionne la recherche",
             Description = "Un modèle améliore la pertinence des résultats. (fallback)",
+            Url = "local://tech-1",
             UrlToImage = "news4.png",
             Content = "Texte local (fallback) — sans connexion Internet.",
             Source = new() { Name = "The Verge" },

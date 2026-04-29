@@ -17,6 +17,9 @@ public class Article
     public string SourceName => Source?.Name ?? "Inconnu";
     public string Date => DateTime.TryParse(PublishedAt, out var d) ? d.ToString("d MMM") : string.Empty;
     public string SourceEtDate => $"{SourceName} / {Date}";
+
+    // Bonus Favoris (non fourni par l'API)
+    public bool IsFavorite { get; set; }
 }
 
 public class ArticleSource

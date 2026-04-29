@@ -16,3 +16,7 @@ obj/
 # Secrets
 **/Secrets.cs
 
+# Local logs / debug
+logcat*.txt
+**/logcat*.txt
+

@@ -7,6 +7,7 @@ namespace NewsApp;
 public partial class MainPage : ContentPage
 {
     private readonly NewsViewModel _vm;
+    private bool _suppressNextSelection;
 
     public MainPage(NewsViewModel vm)
     {
@@ -20,7 +21,10 @@ public partial class MainPage : ContentPage
         SetActiveTab("home");
 
         if (_vm.Articles.Count == 0)
-            await _vm.ChargerArticles();
+        {
+            var defaultCat = Preferences.Get("default_category", "Tout");
+            await _vm.ChargerArticles(defaultCat);
+        }
     }
 
     private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
@@ -28,16 +32,23 @@ public partial class MainPage : ContentPage
         _vm.FiltrerLocalement(e.NewTextValue);
     }
 
-    private void OnCategoryClicked(object? sender, EventArgs e)
+    private async void OnCategoryClicked(object? sender, EventArgs e)
     {
         if (sender is Button button)
         {
-            _ = _vm.ChargerArticles(button.Text ?? "Tout");
+            await _vm.ChargerArticles(button.Text ?? "Tout");
         }
     }
 
     private async void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (_suppressNextSelection)
+        {
+            _suppressNextSelection = false;
+            ArticleCollection.SelectedItem = null;
+            return;
+        }
+
         if (e.CurrentSelection.FirstOrDefault() is Article selected)
         {
             ArticleCollection.SelectedItem = null;
@@ -46,6 +57,30 @@ public partial class MainPage : ContentPage
                 { "Article", selected }
             });
         }
+    }
+
+    private async void OnToggleFavoriteTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Parameter is Article article)
+        {
+            _suppressNextSelection = true;
+            ArticleCollection.SelectedItem = null;
+            await _vm.ToggleFavori(article);
+        }
+    }
+
+    private async void OnDetailsClicked(object? sender, EventArgs e)
+    {
+        if (sender is not BindableObject bo || bo.BindingContext is not Article article)
+            return;
+
+        _suppressNextSelection = true;
+        ArticleCollection.SelectedItem = null;
+
+        await Shell.Current.GoToAsync("detail", new Dictionary<string, object>
+        {
+            { "Article", article }
+        });
     }
 
     private async void OnHomeClicked(object? sender, EventArgs e)
@@ -59,7 +94,14 @@ public partial class MainPage : ContentPage
     private async void OnFavoritesClicked(object? sender, EventArgs e)
     {
         SetActiveTab("favorites");
-        await Shell.Current.GoToAsync(nameof(FavoritesPage));
+        try
+        {
+            await Shell.Current.GoToAsync(nameof(FavoritesPage));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync("Erreur Favoris", ex.Message, "OK");
+        }
     }
 
     private async void OnProfileClicked(object? sender, EventArgs e)

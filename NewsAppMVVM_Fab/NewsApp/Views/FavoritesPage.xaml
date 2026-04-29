@@ -6,16 +6,115 @@
              BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B0F14}">
 
     <Grid RowDefinitions="*,Auto">
-        <VerticalStackLayout Grid.Row="0" Padding="20" Spacing="12">
-            <Label Text="Favoris"
+        <Grid Grid.Row="0" Padding="20" RowDefinitions="Auto,Auto,*" RowSpacing="12">
+            <Label Grid.Row="0"
+                   Text="Favoris"
                    FontSize="24"
                    FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
 
-            <Label Text="Voici les articles favoris."
+            <Label Grid.Row="1"
+                   Text="{Binding CountText}"
                    FontSize="14"
                    TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
-        </VerticalStackLayout>
+
+            <Grid Grid.Row="2" RowDefinitions="Auto,*">
+                <Label Grid.Row="0"
+                       Text="Aucun favori pour le moment."
+                       FontSize="14"
+                       TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding HasItems}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <CollectionView Grid.Row="1"
+                                IsVisible="{Binding HasItems}"
+                                ItemsSource="{Binding Favoris}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Reveal">
+                                        <SwipeItem Text="Supprimer"
+                                                   BackgroundColor="#EF4444"
+                                                   Invoked="OnDeleteInvoked"
+                                                   CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Frame Margin="0,0,0,12"
+                                       Padding="12"
+                                       CornerRadius="16"
+                                       HasShadow="True"
+                                       BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                                       BorderColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnFavoriteTapped"
+                                                              CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnDefinitions="*,100"
+                                          RowDefinitions="Auto,Auto,Auto,Auto"
+                                          ColumnSpacing="12"
+                                          RowSpacing="6">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               Text="{Binding Title}"
+                                               FontAttributes="Bold"
+                                               FontSize="15"
+                                               TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}" />
+
+                                        <Label Grid.Row="1" Grid.Column="0"
+                                               Text="{Binding Description}"
+                                               FontSize="13"
+                                               TextColor="{AppThemeBinding Light=#374151, Dark=#CBD5E1}" />
+
+                                        <Label Grid.Row="2" Grid.Column="0"
+                                               Text="{Binding SourceName}"
+                                               FontSize="11"
+                                               TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
+
+                                        <Image Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+                                               Source="{Binding UrlToImage}"
+                                               WidthRequest="90"
+                                               HeightRequest="70"
+                                               Aspect="AspectFill" />
+
+                                        <Grid Grid.Row="3"
+                                              Grid.Column="0"
+                                              Grid.ColumnSpan="2"
+                                              ColumnDefinitions="*,Auto"
+                                              ColumnSpacing="10"
+                                              VerticalOptions="End">
+                                            <Button Grid.Column="0"
+                                                    Text="Détails"
+                                                    Clicked="OnDetailsClicked"
+                                                    CommandParameter="{Binding .}"
+                                                    CornerRadius="10"
+                                                    Padding="12,8"
+                                                    BackgroundColor="{AppThemeBinding Light=#E5E7EB, Dark=#111827}"
+                                                    TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}"
+                                                    HorizontalOptions="Start" />
+
+                                            <Label Grid.Column="1"
+                                                   FontSize="20"
+                                                   TextColor="#E11D48"
+                                                   Text="♥"
+                                                   VerticalOptions="Center">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnHeartTapped"
+                                                                          CommandParameter="{Binding .}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
 
         <Grid Grid.Row="1"
               Padding="14,10"
