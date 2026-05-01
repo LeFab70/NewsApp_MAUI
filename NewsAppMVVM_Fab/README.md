@@ -7,11 +7,12 @@
 
 Ce projet est une évolution de **NewsApp (Devoir 03)** vers **NewsApp+**, une application **.NET MAUI** qui :
 
-- récupère de vraies nouvelles via **NewsAPI.org** (`top-headlines`, Canada)
+- récupère de vraies nouvelles via **NewsAPI.org** (`top-headlines`, pays configurable via Profil)
 - applique une architecture **MVVM** (sans CommunityToolkit, `INotifyPropertyChanged` manuel)
 - gère un **fallback hors-ligne** (articles locaux) + bandeau *"Hors ligne"*
 - supporte la **recherche en temps réel** + compteur de résultats
 - propose une **page détail** (image, titre, source/date, contenu) + boutons **Lire** / **Partager**
+- affiche une **image locale par défaut** (`dotnet_bot.png`) si l’API ne renvoie pas d’image
 
 ## Structure
 
@@ -42,4 +43,9 @@ cd "NewsAppMVVM_Fab/NewsApp"
 dotnet build "NewsApp.csproj" -c Debug -f net10.0-android
 dotnet build "NewsApp.csproj" -t:Run -c Debug -f net10.0-android
 ```
+
+## Notes
+
+- Si la connexion Internet/DNS n’est pas disponible sur l’émulateur, l’app affiche un message et utilise les **données locales**.
+- Le pays des news est configurable dans **Profil** (ex: `USA (us)`, `Canada (ca)`, `France (fr)`).
 

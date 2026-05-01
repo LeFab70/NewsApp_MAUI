@@ -10,6 +10,7 @@ public class FavoriteArticle
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string UrlToImage { get; set; } = string.Empty;
+    public string Image => string.IsNullOrWhiteSpace(UrlToImage) ? "dotnet_bot.png" : UrlToImage;
     public string SourceName { get; set; } = string.Empty;
     public string PublishedAt { get; set; } = string.Empty;
 }

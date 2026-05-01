@@ -75,7 +75,7 @@
                                                TextColor="{AppThemeBinding Light=#6B7280, Dark=#9CA3AF}" />
 
                                         <Image Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
-                                               Source="{Binding UrlToImage}"
+                                               Source="{Binding Image}"
                                                WidthRequest="90"
                                                HeightRequest="70"
                                                Aspect="AspectFill" />

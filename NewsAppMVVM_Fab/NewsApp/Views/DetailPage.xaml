@@ -7,7 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">
-            <Image Source="{Binding UrlToImage}"
+            <Image Source="{Binding Image}"
                    HeightRequest="220"
                    Aspect="AspectFill" />
 

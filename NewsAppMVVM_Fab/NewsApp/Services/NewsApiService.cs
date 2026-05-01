@@ -64,7 +64,19 @@ public class NewsApiService
         catch (Exception ex)
         {
             Debug.WriteLine($"NewsAPI exception: {ex}");
-            return (ArticleStore.All.ToList(), true, ex.Message);
+            var msg = ex.Message ?? "Erreur réseau";
+
+            // Message plus clair pour les erreurs DNS / absence d'accès Internet sur émulateur
+            if (msg.Contains("hostname", StringComparison.OrdinalIgnoreCase) ||
+                msg.Contains("servname", StringComparison.OrdinalIgnoreCase) ||
+                msg.Contains("Name or service not known", StringComparison.OrdinalIgnoreCase) ||
+                msg.Contains("No such host", StringComparison.OrdinalIgnoreCase) ||
+                msg.Contains("nodename", StringComparison.OrdinalIgnoreCase))
+            {
+                msg = "Pas d'accès Internet/DNS sur l'émulateur (impossible de résoudre newsapi.org).";
+            }
+
+            return (ArticleStore.All.ToList(), true, msg);
         }
     }
 
